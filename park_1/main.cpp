@@ -1,6 +1,18 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
+namespace AAA
+{
+	namespace BBB
+	{
+		namespace CCC
+		{
+			int num;
+			int num2;
+		}
+	}
+}
 
 namespace BestComImpl {
 	void SimpleFunc(void);
@@ -8,6 +20,8 @@ namespace BestComImpl {
 namespace ProgComImpl {
 	void SimpleFunc(void);
 }
+
+
 
 int adder(int num1 = 1, int num2 = 2);
 
@@ -27,9 +41,20 @@ void MyFunc(int a , int b)
 
 int main(void)
 {
+	/* name space - 2
 
-	/* name space
-	BestComImpl::SimpleFunc();
+	AAA::BBB::CCC::num = 20;
+	AAA::BBB::CCC::num2 = 30;
+
+	namespace ABC = AAA::BBB::CCC;
+
+	cout << ABC::num <<endl<< ABC::num2 <<endl;
+	*/
+
+	/* name space - 1
+	
+	using BestComImpl::SimpleFunc;
+	SimpleFunc();
 	ProgComImpl::SimpleFunc();
 	*/
 
