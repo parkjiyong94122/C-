@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A09897BF-2442-4E34-9454-CB4F11E83FDE}</ProjectGuid>
-    <RootNamespace>park1</RootNamespace>
+    <ProjectGuid>{2FE5E732-3414-4E25-9BB3-91949E51EC33}</ProjectGuid>
+    <RootNamespace>su</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -118,11 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bankFunc.cpp" />
-    <ClCompile Include="bankingmanage.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="bankFunc.h" />
+    <ClCompile Include="..\park_1\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

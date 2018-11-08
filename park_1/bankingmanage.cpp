@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int num, acc_num, money;
+	int num, acc_num, money, sel_num;
 	infor* accounts[MAX_ACCOUNT];
 	infor* sel_account;
 	int account_num=0;
@@ -16,8 +16,17 @@ int main(void)
 		{
 			if (account_num < MAX_ACCOUNT)
 			{
+		
 				accounts[account_num] = create_account();
-				account_num++;
+				if (compare(accounts, accounts[account_num]->number, account_num) != 0)
+				{
+					free(accounts[account_num]);
+					cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
+				}
+				else
+				{
+					account_num++;
+				}
 			}
 			else
 				cout << "더 이상 계좌생성이 불가능합니다." << endl;
@@ -30,7 +39,7 @@ int main(void)
 			cout << "입금액:";
 			cin >> money;
 			
-			sel_account = compare(accounts, acc_num, i);
+			sel_account = compare(accounts, acc_num, account_num);
 
 			if (sel_account == 0)
 			{

@@ -1,5 +1,24 @@
-/*#include <iostream>
+#include <iostream>
 #include <cstring>
+#include <stdlib.h>
+
+char * MakeStrAdtr(int len)
+{
+	//char * str = (char *)malloc(sizeof(char)*len);
+	char * str = new char[len];
+	return str;
+}
+
+//#define SQUARE(x) ((x)*(x))
+
+template <typename T>
+
+//템플릿 원하는 자료형으로 변경가능
+inline T SQUARE(T x)
+{
+	return x * x;
+}
+
 using namespace std;
 
 namespace AAA
@@ -40,7 +59,23 @@ void MyFunc(int a , int b)
 }
 
 int main(void)
-{
+{ 
+
+	char * str = MakeStrAdtr(20);
+	strcpy_s(str, "I am happy!.");
+	cout << str << endl;
+	delete[]str;
+	/* boolean
+	cout << "true : " << sizeof(true) << endl;
+	cout << "false : " << false << endl;
+	*/
+	/* 인라인 함수호출부가 함수바디로  C++ 인라인함수 제공
+		C++에서 주는 매크로함수를 대용가능하게함
+	
+	cout << SQUARE(3.3) << endl;
+	cout << SQUARE(3) << endl;
+	*/
+
 	/* name space - 2
 
 	AAA::BBB::CCC::num = 20;
@@ -105,7 +140,7 @@ int main(void)
 	cout << ' ' << 3.14 << endl;
 	*/
 	
-/*
+
 	return 0;
 }
 
@@ -122,4 +157,4 @@ void ProgComImpl::SimpleFunc(void)
 int adder(int num1, int num2)
 {
 	return num1 + num2;
-}*/
+}
