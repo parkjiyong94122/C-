@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <cstring>
 using namespace std;
 
@@ -105,7 +105,7 @@ int main(void)
 	cout << ' ' << 3.14 << endl;
 	*/
 	
-
+/*
 	return 0;
 }
 
@@ -122,4 +122,4 @@ void ProgComImpl::SimpleFunc(void)
 int adder(int num1, int num2)
 {
 	return num1 + num2;
-}
+}*/
