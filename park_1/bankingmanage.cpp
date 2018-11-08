@@ -5,7 +5,7 @@ int main(void)
 	int num, acc_num, money;
 	infor* accounts[MAX_ACCOUNT];
 	infor* sel_account;
-	int i=0;
+	int account_num=0;
 
 	while (1)
 	{
@@ -14,10 +14,10 @@ int main(void)
 
 		if (num == 1)
 		{
-			if (i < MAX_ACCOUNT)
+			if (account_num < MAX_ACCOUNT)
 			{
-				accounts[i] = create_account();
-				i++;
+				accounts[account_num] = create_account();
+				account_num++;
 			}
 			else
 				cout << "더 이상 계좌생성이 불가능합니다." << endl;
@@ -48,7 +48,7 @@ int main(void)
 			cin >> acc_num;
 			cout << "출금액:";
 			cin >> money;
-			sel_account = compare(accounts, acc_num, i);
+			sel_account = compare(accounts, acc_num, account_num);
 
 			if (sel_account == 0)
 			{
@@ -62,14 +62,14 @@ int main(void)
 		}
 		else if (num == 4)
 		{
-			for (int j = 0; j < i; j++)
+			for (int j = 0; j < account_num; j++)
 			{
 				Call_Account(accounts[j]);
 			}
 		}
 		else if (num == 5)
 		{
-			Delete_account(accounts, i);
+			Delete_account(accounts, account_num);
 			break;
 		}
 		else
