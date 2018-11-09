@@ -27,7 +27,7 @@ using namespace std;
 */
 
 //class 캡슐화(정보은닉, 범위) 상속 추상화 다
-
+//유일무이한 경우 객체라 말할 수 있다.
 
 
 void SwapByRef(int &ref1, int &ref2)
@@ -47,7 +47,7 @@ int main(void)
 {
 	//car 구조체 사용을 위한 초기화,
 
-	Car run77;
+	Car run77; //객체
 	run77.InitMembers("run77", 100);
 	run77.Accel();
 	run77.Accel();
@@ -55,7 +55,7 @@ int main(void)
 	run77.Break();
 	run77.ShowCarState();
 
-	Car run88;
+	Car run88; //객체
 	run88.InitMembers("run88", 100);
 	run88.Accel();
 	run88.Break();
