@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="20181109.cpp" />
+    <ClCompile Include="car.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="car.h" />
