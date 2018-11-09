@@ -59,12 +59,15 @@ void MyFunc(int a , int b)
 }
 
 int main(void)
-{ 
+{
 
+
+	/* 동적 할당
 	char * str = MakeStrAdtr(20);
 	strcpy_s(str, "I am happy!.");
 	cout << str << endl;
 	delete[]str;
+	*/
 	/* boolean
 	cout << "true : " << sizeof(true) << endl;
 	cout << "false : " << false << endl;
