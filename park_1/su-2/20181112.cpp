@@ -58,6 +58,7 @@ public:
 		NumOfApple = 0;
 	}
 	//사과 구입함수
+	//객체간의 거래
 	void BuyApple(FruitSeller &seller, int money)
 	{
 		NumOfApple += seller.SalesApples(money);
