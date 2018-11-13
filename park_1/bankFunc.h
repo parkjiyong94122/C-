@@ -6,17 +6,18 @@
 
 using namespace std;
 
-typedef struct customer
+class account
 {
 	int money;
 	int number;
-	char name[20];
+	char* name;
+
+	account();
+	void CallAccount();
+	void compare(int num, int count);
+	void Deposit(int money);
+	int Withdraw(int money);
+	~account();
+	
 }infor;
 
-void call_menu();
-infor *create_account();
-void Call_Account(infor* account);
-infor *compare(infor** account, int num, int count);
-void Deposit(infor* account, int money);
-int Withdraw(infor* account, int money);
-void Delete_account(infor** account, int count);

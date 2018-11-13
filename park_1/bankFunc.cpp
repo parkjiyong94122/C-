@@ -1,5 +1,7 @@
 #include"bankFunc.h"
 
+
+
 void call_menu()
 {
 	cout << "---------Menu---------" << endl;
@@ -11,7 +13,12 @@ void call_menu()
 
 	cout << "선택 ";
 }
-infor *create_account()
+void account::Call_Account()
+{
+	cout << "계좌ID  :" << << endl << "이름 :" <<<< endl << "입금액 :" << account->money << endl;
+
+}
+account()
 {
 	infor* m;
 	m = (infor*)malloc(sizeof(infor));
@@ -24,11 +31,7 @@ infor *create_account()
 
 	return m;
 }
-void Call_Account(infor* account)
-{
-	cout << "계좌ID  :" << account->number << endl << "이름 :" << account->name << endl << "입금액 :" << account->money << endl;
 
-}
 
 infor *compare(infor** account, int num, int count)
 {
