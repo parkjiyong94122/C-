@@ -3,10 +3,13 @@
 using namespace std;
 
 /*
-- 정규직은 사원이다.
-- 사원명,월급을 관리할 수 있도록 클래스를 디자인하세요
-- 사원을 관리할 수 있는 클래스를 디자인.
-- 이번달 지불해야할 총급여 출력
+- 정규직은 사원이다.(상속)
+- 사원명,월급을 관리할 수 있도록 클래스를 디자인하세요.(캡슐화)
+- 사원을 관리할 수 있는 클래스를 디자인.(다형성)
+- 이번달 지불해야할 총급여 출력(virtual)
+- 영업직, 임시직의 entity class 생성.
+- 영업직의 급여는 기본급에 성과금 포함.
+- 임시직의 급여는 시금으로 계산하여 지급
 - 간단한 인사관리 프로그램을 작성하세요.
 */
 
@@ -27,12 +30,53 @@ public:
 		cout << "가상함수 " << endl;
 		return 0;
 	}
-	virtual void ShowEmployeeInfo() const
+	void ShowInfo() const
 	{
 		cout << "name    : " << name << endl;
 		cout << "age     : " << age << endl;
 	}
+	virtual void ShowEmployeeInfo() const
+	{
+	}
 	
+};
+class buisiness : public Employee
+{
+private:
+	int salary;
+	int incentive;
+public:
+	buisiness(int myAge, const char* myName, int money, int incentives) : Employee(myAge, myName), salary(money), incentive(incentives)
+	{}
+	void ShowEmployeeInfo() const
+	{
+		ShowInfo();
+		cout << "salary :" << salary << endl;
+		cout << "incentive : " << incentive << endl;
+	}
+	int GetSalary() const
+	{
+		return salary+incentive;
+	}
+};
+class temporary : public Employee
+{
+private:
+	int urgent;
+	int hour;
+public:
+	temporary(int myAge, const char* myName, int myUrgent, int hours) : Employee(myAge,myName), urgent(myUrgent), hour(hours)
+	{}
+	void ShowEmployeeInfo() const
+	{
+		ShowInfo();
+		cout << "urgent : " << urgent << endl;
+		cout << "hour   : " << hour << endl;
+	}
+	int GetSalary() const
+	{
+		return (urgent * hour);
+	}
 };
 class permanentWorker : public Employee
 {
@@ -41,12 +85,10 @@ private:
 	char position[20];
 public:
 	permanentWorker(int myAge, const char* myName, int money) : Employee(myAge, myName),salary(money)
-	{
-	}
+	{}
 	void ShowEmployeeInfo() const
 	{
-		cout << "name   : " << name << endl;
-		cout << "age    : " << age << endl;
+		ShowInfo();
 		cout << "salary :" << salary << endl;
 	}
 	int GetSalary() const
@@ -103,6 +145,10 @@ int main(void)
 	s1.AddEmployee(new Employee(17, "park"));
 	s1.AddEmployee(new permanentWorker(23, "kim", 300));
 	s1.AddEmployee(new permanentWorker(27, "park", 600));
+	s1.AddEmployee(new temporary(22, "qqq", 1, 10));
+	s1.AddEmployee(new temporary(22, "aaaa", 1, 13));
+	s1.AddEmployee(new buisiness(23, "ABC", 200, 300));
+	s1.AddEmployee(new buisiness(23, "CBA", 200, 300));
 
 
 	s1.ShowAllEmployee();
