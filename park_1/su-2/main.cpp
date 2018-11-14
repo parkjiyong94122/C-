@@ -96,7 +96,7 @@ public:
 	void ShowEmployeeInfo() const
 	{
 		ShowInfo();
-		cout << "salary : " << urgent << endl;
+		cout << "salary : " << urgent*hour << endl;
 	}
 	int GetSalary() const
 	{
