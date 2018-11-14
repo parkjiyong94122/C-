@@ -40,44 +40,6 @@ public:
 	}
 	
 };
-class buisiness : public Employee
-{
-private:
-	int salary;
-	int incentive;
-public:
-	buisiness(int myAge, const char* myName, int money, int incentives) : Employee(myAge, myName), salary(money), incentive(incentives)
-	{}
-	void ShowEmployeeInfo() const
-	{
-		ShowInfo();
-		cout << "salary :" << salary << endl;
-		cout << "incentive : " << incentive << endl;
-	}
-	int GetSalary() const
-	{
-		return salary+incentive;
-	}
-};
-class temporary : public Employee
-{
-private:
-	int urgent;
-	int hour;
-public:
-	temporary(int myAge, const char* myName, int myUrgent, int hours) : Employee(myAge,myName), urgent(myUrgent), hour(hours)
-	{}
-	void ShowEmployeeInfo() const
-	{
-		ShowInfo();
-		cout << "urgent : " << urgent << endl;
-		cout << "hour   : " << hour << endl;
-	}
-	int GetSalary() const
-	{
-		return (urgent * hour);
-	}
-};
 class permanentWorker : public Employee
 {
 private:
@@ -96,6 +58,50 @@ public:
 		return salary;
 	}
 	//디폴트 소멸자
+};
+class buisiness : public permanentWorker
+{
+private:
+	int salesResult;
+	double incentive;
+public:
+	buisiness(int myAge, const char* myName, int money, double incentives) : permanentWorker(myAge, myName, money), incentive(incentives), salesResult(0)
+	{}
+	void AddSalesResult(int value)
+	{
+		salesResult += value;
+	}
+	void ShowSalaryInfo() const
+	{
+		ShowInfo();
+		cout << "salary :" << GetSalary() << endl;
+	}
+	int GetSalary() const
+	{
+		return (int)(salesResult*incentive) + permanentWorker::GetSalary();
+	}
+};
+class temporary : public Employee
+{
+private:
+	int urgent;
+	int hour;
+public:
+	temporary(int myAge, const char* myName, int myUrgent) : Employee(myAge, myName), urgent(myUrgent), hour(0)
+	{}
+	void AddWorkTime(int time)
+	{
+		hour += time;
+	}
+	void ShowEmployeeInfo() const
+	{
+		ShowInfo();
+		cout << "salary : " << urgent << endl;
+	}
+	int GetSalary() const
+	{
+		return (urgent * hour);
+	}
 };
 class EmployeeHandler //handler class 기능을 관리
 {
@@ -142,14 +148,15 @@ int main(void)
 	EmployeeHandler s1;
 
 	s1.AddEmployee(new Employee(13, "kim"));
-	s1.AddEmployee(new Employee(17, "park"));
 	s1.AddEmployee(new permanentWorker(23, "kim", 300));
-	s1.AddEmployee(new permanentWorker(27, "park", 600));
-	s1.AddEmployee(new temporary(22, "qqq", 1, 10));
-	s1.AddEmployee(new temporary(22, "aaaa", 1, 13));
-	s1.AddEmployee(new buisiness(23, "ABC", 200, 300));
-	s1.AddEmployee(new buisiness(23, "CBA", 200, 300));
-
+	//영업직
+	buisiness* seller = new buisiness(23, "ABC", 200, 0.4);
+	seller->AddSalesResult(10000);
+	s1.AddEmployee(seller);
+	//아르바이트
+	temporary* alba = new temporary(22, "aaaa", 1);
+	alba->AddWorkTime(100);
+	s1.AddEmployee(alba);
 
 	s1.ShowAllEmployee();
 
