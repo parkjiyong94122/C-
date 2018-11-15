@@ -62,10 +62,8 @@ class NormalAccount : public account
 private:
 	double interestRate;
 public:
-	NormalAccount(a)
-	{
-
-	}
+	NormalAccount(int num, int mon, char* nam, double rate) : account(num,mon,nam),interestRate(rate)
+	{}
 	void NormalDeposit(int mon)
 	{
 		Deposit((int)(mon*interestRate)) * Deposit(mon);
@@ -80,9 +78,16 @@ public:
 class HighCreditAccount : public account
 {
 private:
-	double specialRate;
+	double interestRate;
+	char specialRate;
 public:
-	HighCreditAccount();
+	HighCreditAccount(int num, int mon, char* nam, double rate , char special) : account(num, mon, nam), specialRate(special), interestRate(rate)
+	{}
+	void CallSpecialAccount()
+	{
+		CallAccount();
+		cout << "ÀÌÀÚÀ² : " << interestRate << endl;
+	}
 };
 class ControlBank
 {
