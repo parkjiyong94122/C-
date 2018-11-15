@@ -18,13 +18,5 @@
     <ClCompile Include="cold.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="coldpatient.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="coldpatient.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
