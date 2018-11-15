@@ -28,7 +28,7 @@ public:
 		name = new char[len];
 		strcpy(name, copy.name);
 	}
-	void CallAccount()const
+	virtual void CallAccount()const
 	{
 		cout << "계좌ID  :" << number << endl << "이름 :" << name << endl << "입금액 :" << money << endl;
 	}
@@ -39,10 +39,9 @@ public:
 		else 
 			return 0;
 	}
-	int Deposit(int mon)
+	virtual void Deposit(int mon)
 	{
 		money += mon;
-		return money;
 	}
 	int Withdraw(int mon)
 	{
@@ -64,13 +63,14 @@ private:
 public:
 	NormalAccount(int num, int mon, char* nam, double rate) : account(num,mon,nam),interestRate(rate)
 	{}
-	void NormalDeposit(int mon)
+	void Deposit(int mon)
 	{
-		Deposit((int)(mon*interestRate)) * Deposit(mon);
+		account::Deposit(mon);
+		account::Deposit((int)(mon*interestRate));
 	}
-	void CallNormalAccount()
+	void CallNormalAccount() const
 	{
-		CallAccount();
+		account::CallAccount();
 		cout << "이자율 : " << interestRate << endl;
 	}
 };
@@ -82,20 +82,39 @@ private:
 	char specialRate;
 public:
 	HighCreditAccount(int num, int mon, char* nam, double rate , char special) : account(num, mon, nam), specialRate(special), interestRate(rate)
-	{}
-	void CallSpecialAccount()
 	{
-		CallAccount();
+		if (special == 'A')
+			interestRate += 0.7;
+		else if(special == 'B')
+			interestRate += 0.4;
+		else if (special == 'C')
+			interestRate += 0.2;
+	}
+	void Deposit(int mon)
+	{
+		account::Deposit(mon);
+		account::Deposit((int)(mon*interestRate));
+	}
+	void CallAccount() const
+	{
+		account::CallAccount();
 		cout << "이자율 : " << interestRate << endl;
+		cout << "고객등급 : " << specialRate << endl;
 	}
 };
 class ControlBank
 {
 private:
 	account *accounts[MAX_ACCOUNT];
-	
+	int account_num;
 public:
-
+	ControlBank() :account_num(0)
+	{}
+	void CreateAccount(int num, int money, char* name)
+	{
+		accounts[account_num] = new account(num, money, name);
+		account_num++;
+	}
 };
 
 
