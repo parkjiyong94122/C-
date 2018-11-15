@@ -61,7 +61,7 @@ class NormalAccount : public account
 private:
 	double interestRate;
 public:
-	NormalAccount(int num, int mon, char* nam, double rate) : account(num,mon,nam),interestRate(rate)
+	NormalAccount(int num, int mon, char* nam, double rate) : account(num,mon,nam),interestRate(rate*0.01)
 	{}
 	void Deposit(int mon)
 	{
@@ -81,7 +81,7 @@ private:
 	double interestRate;
 	char specialRate;
 public:
-	HighCreditAccount(int num, int mon, char* nam, double rate , char special) : account(num, mon, nam), specialRate(special), interestRate(rate)
+	HighCreditAccount(int num, int mon, char* nam, double rate , char special) : account(num, mon, nam), specialRate(special), interestRate(rate*0.01)
 	{
 		if (special == 'A')
 			interestRate += 0.7;
@@ -112,7 +112,7 @@ public:
 	{}
 	int AccountCompare(int num)
 	{
-		for (int cur = 0; cur > account_num; cur++)
+		for (int cur = 0; cur < account_num; cur++)
 		{
 			if (accounts[cur]->compare(num) == 1)
 				return cur;
@@ -130,10 +130,10 @@ public:
 				cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
 				delete accounts[sel_count];
 			}
-		}
-		else
-		{
-			account_num++;
+			else
+			{
+				account_num++;
+			}
 		}
 		//동일 id 제외
 	}
@@ -184,7 +184,9 @@ public:
 
 int main(void)
 {
-	int num, in_num, money;
+	int num, num2, in_num, money;
+	double rate;
+	char special;
 	char name[30];
 
 	ControlBank bank;
@@ -198,13 +200,39 @@ int main(void)
 
 		if (num == 1)
 		{
-			cout << " 계좌 ID : ";
-			cin >> in_num;
-			cout << " 이름	  : ";
-			cin >> name;
-			cout << " 입금액  : ";
-			cin >> money;
-			bank.CreateAccounts(new account(in_num, money, name));
+			cout << "보통 계좌 : 1		신용 계좌 : 2  " << endl;
+			cin >> num2;
+				
+			switch (num2)
+			{	
+				case 1:
+					cout << " 계좌 ID : ";
+					cin >> in_num;
+					cout << " 이름	  : ";
+					cin >> name;
+					cout << " 입금액  : ";
+					cin >> money;
+					cout << " 이율    : ";
+					cin >> rate;
+					bank.CreateAccounts(new NormalAccount(in_num, money, name, rate));
+					break;
+				
+				case 2:
+					cout << " 계좌 ID : ";
+					cin >> in_num;
+					cout << " 이름	  : ";
+					cin >> name;
+					cout << " 입금액  : ";
+					cin >> money;
+					cout << " 이율    : ";
+					cin >> rate;
+					cout << " 등급    : ";
+					cin >> special;
+					bank.CreateAccounts(new HighCreditAccount(in_num, money, name,rate,special));
+					break;
+			}
+
+			
 		}
 		else if (num == 2)
 		{
@@ -226,7 +254,7 @@ int main(void)
 		}
 		else if (num == 4)
 		{
-			bank.ShowAllAccounts
+			bank.ShowAllAccounts();
 		}
 		else if (num == 5)
 		{
