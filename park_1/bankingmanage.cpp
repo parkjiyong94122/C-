@@ -68,10 +68,10 @@ public:
 		account::Deposit(mon);
 		account::Deposit((int)(mon*interestRate));
 	}
-	void CallNormalAccount() const
+	void CallAccount() const
 	{
 		account::CallAccount();
-		cout << "이자율 : " << interestRate << endl;
+		cout << "이자율 : " << interestRate * 100 << endl;
 	}
 };
 
@@ -98,7 +98,7 @@ public:
 	void CallAccount() const
 	{
 		account::CallAccount();
-		cout << "이자율 : " << interestRate << endl;
+		cout << "이자율 : " << interestRate*100 << endl;
 		cout << "고객등급 : " << specialRate << endl;
 	}
 };
@@ -116,24 +116,27 @@ public:
 		{
 			if (accounts[cur]->compare(num) == 1)
 				return cur;
-			else if (cur == account_num - 1)
-				return 0;
 		}
+		return -1;
 	}
 	void CreateAccounts(account* account)
 	{
-		if (account_num > MAX_ACCOUNT)
+		if (account_num < MAX_ACCOUNT)
 		{
 			int sel_count = AccountCompare(account_num);
-			if (sel_count != 0)
+			if (sel_count != -1)
 			{
 				cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
-				delete accounts[sel_count];
 			}
 			else
 			{
+				accounts[account_num] = account;
 				account_num++;
 			}
+		}
+		else
+		{
+			cout << "더 이상 계좌 생성이 불가능합니다." << endl;
 		}
 		//동일 id 제외
 	}
@@ -141,7 +144,7 @@ public:
 	void DepositAccounts(int num,int money)
 	{
 		int sel_count = AccountCompare(num);
-		if (sel_count == 0)
+		if (sel_count == -1)
 		{
 			cout << "올바른 ID 를 입력해주세요 " << endl;
 		}
@@ -154,7 +157,7 @@ public:
 	void WithdrawAccounts(int num, int money)
 	{
 		int sel_count = AccountCompare(num);
-		if (sel_count == 0)
+		if (sel_count == -1)
 		{
 			cout << "올바른 ID 를 입력해주세요 " << endl;
 		}
