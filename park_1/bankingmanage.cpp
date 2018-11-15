@@ -22,7 +22,13 @@ public:
 		name = new char[len];
 		strcpy(name, nam);
 	}
-	void CallAccount()
+	account(account &copy) : number(copy.number), money(copy.money)
+	{
+		int len = strlen(copy.name) + 1;
+		name = new char[len];
+		strcpy(name, copy.name);
+	}
+	void CallAccount()const
 	{
 		cout << "계좌ID  :" << number << endl << "이름 :" << name << endl << "입금액 :" << money << endl;
 	}
@@ -33,9 +39,10 @@ public:
 		else 
 			return 0;
 	}
-	void Deposit(int mon)
+	int Deposit(int mon)
 	{
 		money += mon;
+		return money;
 	}
 	int Withdraw(int mon)
 	{
@@ -49,14 +56,49 @@ public:
 		cout << "삭제됨 " << endl;
 		delete name;
 	}
+};
+class NormalAccount : public account
+{
+private:
+	double interestRate;
+public:
+	NormalAccount(a)
+	{
+
+	}
+	void NormalDeposit(int mon)
+	{
+		Deposit((int)(mon*interestRate)) * Deposit(mon);
+	}
+	void CallNormalAccount()
+	{
+		CallAccount();
+		cout << "이자율 : " << interestRate << endl;
+	}
+};
+
+class HighCreditAccount : public account
+{
+private:
+	double specialRate;
+public:
+	HighCreditAccount();
+};
+class ControlBank
+{
+private:
+	account *accounts[MAX_ACCOUNT];
+	
+public:
 
 };
+
 
 int main(void)
 {
 	int num, in_num, money;
 	char name[30];
-	account *accounts[MAX_ACCOUNT];
+	
 	int account_num=0;
 
 	while (1)
