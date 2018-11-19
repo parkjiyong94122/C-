@@ -18,7 +18,7 @@ int main(void)
 
 		if (num == 1)
 		{
-			cout << "º¸Åë °èÁÂ : 1		½Å¿ë °èÁÂ : 2  " << endl;
+			cout << "º¸Åë °èÁÂ : 1		½Å¿ë °èÁÂ : 2        ::" ;
 			cin >> num2;
 				
 			switch (num2)
@@ -48,6 +48,7 @@ int main(void)
 					cin >> special;
 					bank.CreateAccounts(new HighCreditAccount(in_num, money, name,rate,special));
 					break;
+
 			}
 		}
 		else if (num == 2)
