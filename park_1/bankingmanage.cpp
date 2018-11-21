@@ -1,4 +1,21 @@
 #include"bank.h"
+#include"AccountArray.h"
+
+class BoundCheckPointArray
+{
+
+};
+
+class DepositException
+{
+
+};
+
+class WithdrawException
+{
+
+};
+
 
 int main(void)
 {
