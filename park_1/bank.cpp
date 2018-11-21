@@ -76,6 +76,23 @@ void HighCreditAccount::CallAccount() const
 		cout << "고객등급 : " << specialRate << endl;
 	}
 
+BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
+{
+	acc = new account[len];
+}
+account& BoundCheckPointArray::operator[](int idx)
+{
+	if (idx < 0 || idx > MAX_ACCOUNT)
+	{
+		cout << "더 이상 계좌를 개설할 수 없습니다." << endl;
+		exit(1);
+	}
+	return acc[idx];
+}
+BoundCheckPointArray::~BoundCheckPointArray()
+{
+	delete[] acc;
+}
 
 ControlBank::ControlBank() :account_num(0)
 	{}
@@ -89,26 +106,20 @@ int ControlBank::AccountCompare(int num)
 		return -1;
 	}
 void ControlBank::CreateAccounts(account* account)
-	{
-		if (account_num < MAX_ACCOUNT)
+{
+	BoundCheckPointArray acc(account_num);
+		int sel_count = AccountCompare(account_num);
+		if (sel_count != -1)
 		{
-			int sel_count = AccountCompare(account_num);
-			if (sel_count != -1)
-			{
-				cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
-			}
-			else
-			{
-				accounts[account_num] = account;
-				account_num++;
-			}
+			cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
 		}
 		else
 		{
-			cout << "더 이상 계좌 생성이 불가능합니다." << endl;
+			accounts[account_num] = account;
+			account_num++;
 		}
 		//동일 id 제외
-	}
+}
 	//입금
 void ControlBank::DepositAccounts(int num, int money)
 	{
@@ -153,27 +164,9 @@ void ControlBank::DeleteAccounts()
 	}
 
 
-BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
-{	
-	acc = new account[len];
-}
-account& BoundCheckPointArray::operator[](int idx)
-{		
-	if (idx < 0 || idx > MAX_ACCOUNT)
-	{
-
-	}
-
-	return acc[idx];
-}
-BoundCheckPointArray::~BoundCheckPointArray()
-	{
-		delete[] acc;
-	}
-
 
 DepositException::DepositException(int money) : myMoney(money)
-	{}
+{}
 void DepositException::ShowResult()
 	{
 		cout << "입금 오류 : " << myMoney << "를 입금할 수 없습니다." << endl;

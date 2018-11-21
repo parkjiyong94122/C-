@@ -46,7 +46,7 @@ public:
 class ControlBank
 {
 private:
-	account * accounts[MAX_ACCOUNT];
+	account** accounts;
 	int account_num;
 public:
 	ControlBank();
@@ -64,10 +64,10 @@ public:
 class BoundCheckPointArray
 {
 private:
-	account * acc;
+	account* acc;
 	int acclen;
 public:
-	BoundCheckPointArray(int len) : acclen(len);
+	BoundCheckPointArray(int len);
 	account& operator[](int len);
 	~BoundCheckPointArray();
 };
