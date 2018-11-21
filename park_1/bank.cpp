@@ -85,9 +85,9 @@ void HighCreditAccount::CallAccount() const
 
 BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
 {
-	acc = new account[len];
+	acc = new account*[len];
 }
-account& BoundCheckPointArray::operator[](int idx)
+account* BoundCheckPointArray::operator[](int idx)
 {
 	if (idx < 0 || idx > acclen)
 	{
@@ -101,9 +101,8 @@ BoundCheckPointArray::~BoundCheckPointArray()
 	delete[] acc;
 }
 
-ControlBank::ControlBank() :account_num(0)
-{
-}
+ControlBank::ControlBank() :account_num(0), accounts(MAX_ACCOUNT)
+{}
 int ControlBank::AccountCompare(int num)
 	{
 		for (int cur = 0; cur < account_num; cur++)
@@ -122,13 +121,14 @@ void ControlBank::CreateAccounts(account* account)
 	}
 	else
 	{
+		//accounts[account_num] = account;
 		accounts[account_num] = account;
 		account_num++;
 	}
 		//동일 id 제외
 }
 	//입금
-void ControlBank::DepositAccounts(int num, int money)
+int ControlBank::DepositAccounts(int num, int money)
 	{
 		int sel_count = AccountCompare(num);
 		if (sel_count == -1)
@@ -144,13 +144,13 @@ void ControlBank::DepositAccounts(int num, int money)
 			catch (AccountException & expn)
 			{
 				expn.ShowResult();
-				ControlBank::DepositAccounts(num, money);
+				return 1;
 			}
-			
+			return 0;
 		}
 	}
 	//출금
-void ControlBank::WithdrawAccounts(int num, int money) 
+int ControlBank::WithdrawAccounts(int num, int money) 
 	{
 		int sel_count = AccountCompare(num);
 		if (sel_count == -1)
@@ -166,8 +166,9 @@ void ControlBank::WithdrawAccounts(int num, int money)
 			catch (AccountException & expn)
 			{
 				expn.ShowResult();
-				ControlBank::WithdrawAccounts(num, money);
+				return 1;
 			}
+			return 0;
 		}
 	}
 	//확인
@@ -181,10 +182,12 @@ void ControlBank::ShowAllAccounts()
 	//삭제
 void ControlBank::DeleteAccounts()
 	{
+	/*
 		for (int cur = 0; cur < account_num; cur++)
 		{
 			delete accounts[cur];
 		}
+	*/
 	}
 
 

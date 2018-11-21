@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_ACCOUNT 100
+#define MAX_ACCOUNT 5
 #include <iostream>
 #include <cstring>
 
@@ -47,27 +47,27 @@ public:
 class BoundCheckPointArray
 {
 private:
-	account * acc;
+	account** acc;
 	int acclen;
 public:
 	BoundCheckPointArray(int len);
-	account& operator[](int len);
+	account* operator[](int len);
 	~BoundCheckPointArray();
 };
 
 class ControlBank
 {
 private:
-	account** accounts;
+	BoundCheckPointArray accounts;
 	int account_num;
 public:
 	ControlBank();
 	int AccountCompare(int num);
 	void CreateAccounts(account* account);
 	//입금
-	void DepositAccounts(int num, int money);
+	int DepositAccounts(int num, int money);
 	//출금
-	void WithdrawAccounts(int num, int money);
+	int WithdrawAccounts(int num, int money);
 	//확인
 	void ShowAllAccounts();
 	//삭제

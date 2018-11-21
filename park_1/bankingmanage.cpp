@@ -59,7 +59,15 @@ int main(void)
 			cin >> in_num;
 			cout << "입금액:";
 			cin >> money;
-			bank.DepositAccounts(in_num, money);
+			while (bank.DepositAccounts(in_num, money))
+			{
+				cout << endl << " 재입력 해주세요" << endl;
+				cout << "[입금]" << endl;
+				cout << "계좌 ID :";
+				cin >> in_num;
+				cout << "입금액:";
+				cin >> money;
+			}
 		}
 		else if (num == 3)
 		{
@@ -68,7 +76,15 @@ int main(void)
 			cin >> in_num;
 			cout << "출금액:";
 			cin >> money;
-			bank.WithdrawAccounts(in_num, money);
+			while (bank.WithdrawAccounts(in_num, money))
+			{
+				cout << endl << " 재입력 해주세요" << endl;
+				cout << "[출금]" << endl;
+				cout << "계좌 ID :";
+				cin >> in_num;
+				cout << "출금액:";
+				cin >> money;
+			}
 		}
 		else if (num == 4)
 		{
