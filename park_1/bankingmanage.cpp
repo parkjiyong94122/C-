@@ -9,17 +9,31 @@ private:
 public:
 	BoundCheckPointArray(int len) : acclen(len)
 	{
-
+		acc = new account[len];
+	}
+	~BoundCheckPointArray()
+	{
+		delete[] acc;
 	}
 };
 
 class DepositException
 {
-
+private:
+	int myMoney;
+public:
+	DepositException(int money) : myMoney(money)
+	{}
+	void 
 };
 
 class WithdrawException
 {
+private:
+	int myMoney;
+public:
+	WithdrawException(int money) : myMoney(money)
+	{}
 
 };
 
