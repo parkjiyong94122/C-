@@ -85,7 +85,7 @@ void HighCreditAccount::CallAccount() const
 
 BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
 {
-	acc = new account*[len];
+	accounts = new account* [len];
 }
 account* BoundCheckPointArray::operator[](int idx)
 {
@@ -94,11 +94,15 @@ account* BoundCheckPointArray::operator[](int idx)
 		cout << "더 이상 계좌를 개설할 수 없습니다." << endl;
 		exit(1);
 	}
-	return acc[idx];
+	return accounts[idx];
+}
+void BoundCheckPointArray::AccountCreate(int num, account* account)
+{
+	accounts[num] = account;
 }
 BoundCheckPointArray::~BoundCheckPointArray()
 {
-	delete[] acc;
+	delete[] accounts;
 }
 
 ControlBank::ControlBank() :account_num(0), accounts(MAX_ACCOUNT)
@@ -122,7 +126,7 @@ void ControlBank::CreateAccounts(account* account)
 	else
 	{
 		//accounts[account_num] = account;
-		accounts[account_num] = account;
+		accounts.AccountCreate(account_num, account);
 		account_num++;
 	}
 		//동일 id 제외

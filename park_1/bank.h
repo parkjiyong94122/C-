@@ -47,11 +47,12 @@ public:
 class BoundCheckPointArray
 {
 private:
-	account** acc;
+	account** accounts;
 	int acclen;
 public:
 	BoundCheckPointArray(int len);
 	account* operator[](int len);
+	void AccountCreate(int num,account* account);
 	~BoundCheckPointArray();
 };
 
