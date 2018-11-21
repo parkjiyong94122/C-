@@ -25,7 +25,7 @@ int account::compare(int num)
 		else
 			return 0;
 	}
-void account::Deposit(int mon) 
+void account::Deposit(int mon)  throw DepositException()
 	{
 		money += mon;
 	}
@@ -82,7 +82,7 @@ BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
 }
 account& BoundCheckPointArray::operator[](int idx)
 {
-	if (idx < 0 || idx > MAX_ACCOUNT)
+	if (idx < 0 || idx > acclen)
 	{
 		cout << "더 이상 계좌를 개설할 수 없습니다." << endl;
 		exit(1);

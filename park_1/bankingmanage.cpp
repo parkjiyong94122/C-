@@ -1,59 +1,6 @@
 #include"bank.h"
 #include"AccountArray.h"
 
-class BoundCheckPointArray
-{
-private:
-	account* acc;
-	int acclen;
-public:
-	BoundCheckPointArray(int len) : acclen(len)
-	{
-		acc = new account[len];
-	}
-	BoundCheckPointArray& operator[](int len)
-	{
-
-	}
-	~BoundCheckPointArray()
-	{
-		delete[] acc;
-	}
-};
-
-class AccountException
-{
-public:
-	virtual void ShowResult()=0;
-};
-
-class DepositException : public AccountException
-{
-private:
-	int myMoney;
-public:
-	DepositException(int money) : myMoney(money)
-	{}
-	void ShowResult()
-	{
-		cout << "입금 오류 : " << myMoney << "를 입금할 수 없습니다." << endl;
-	}
-};
-
-class WithdrawException : public AccountException
-{
-private:
-	int myMoney;
-public:
-	WithdrawException(int money) : myMoney(money)
-	{}
-	void ShowResult()
-	{
-		cout << "출금 오류 : " << myMoney << "를 출금할 수 없습니다." << endl;
-	}
-};
-
-
 int main(void)
 {
 	int num, num2, in_num, money;
