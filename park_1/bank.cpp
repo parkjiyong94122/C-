@@ -102,7 +102,8 @@ BoundCheckPointArray::~BoundCheckPointArray()
 }
 
 ControlBank::ControlBank() :account_num(0)
-	{}
+{
+}
 int ControlBank::AccountCompare(int num)
 	{
 		for (int cur = 0; cur < account_num; cur++)
@@ -114,17 +115,16 @@ int ControlBank::AccountCompare(int num)
 	}
 void ControlBank::CreateAccounts(account* account)
 {
-	BoundCheckPointArray acc(account_num);
-		int sel_count = AccountCompare(account_num);
-		if (sel_count != -1)
-		{
-			cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
-		}
-		else
-		{
-			accounts[account_num] = account;
-			account_num++;
-		}
+	int sel_count = AccountCompare(account_num);
+	if (sel_count != -1)
+	{
+		cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
+	}
+	else
+	{
+		accounts[account_num] = account;
+		account_num++;
+	}
 		//동일 id 제외
 }
 	//입금

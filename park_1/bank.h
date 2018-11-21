@@ -43,6 +43,18 @@ public:
 	void Deposit(int mon);
 	void CallAccount() const;
 };
+
+class BoundCheckPointArray
+{
+private:
+	account * acc;
+	int acclen;
+public:
+	BoundCheckPointArray(int len);
+	account& operator[](int len);
+	~BoundCheckPointArray();
+};
+
 class ControlBank
 {
 private:
@@ -61,16 +73,7 @@ public:
 	//ªË¡¶
 	void DeleteAccounts();
 };
-class BoundCheckPointArray
-{
-private:
-	account** acc;
-	int acclen;
-public:
-	BoundCheckPointArray(int len);
-	account& operator[](int len);
-	~BoundCheckPointArray();
-};
+
 
 class AccountException
 {
