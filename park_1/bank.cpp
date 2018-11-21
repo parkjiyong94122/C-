@@ -34,11 +34,13 @@ void account::Deposit(int mon)  throw (DepositException)
 	}
 	money += mon;
 }
-void account::Withdraw(int mon)
+void account::Withdraw(int mon) throw (WithdrawException)
 {
 	if (money < mon)
-		cout << "잔액이 부족합니다." << endl;
-	else
+	{
+		WithdrawException expn(mon);
+		throw expn;
+	}
 		money -= mon;
 }
 account::~account()
@@ -135,7 +137,15 @@ void ControlBank::DepositAccounts(int num, int money)
 		}
 		else
 		{
-			accounts[sel_count]->Deposit(money);
+			try
+			{
+				accounts[sel_count]->Deposit(money);
+			}
+			catch (int expn)
+			{
+				
+			}
+			
 		}
 	}
 	//출금
