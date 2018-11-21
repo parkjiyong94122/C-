@@ -1,6 +1,6 @@
 #include"bank.h"
 
-account::account(int num, int mon, char* nam)
+account::account(int num =0 , int mon = 0, char* nam =NULL)
 	{
 		number = num;
 		money = mon;
@@ -25,7 +25,7 @@ int account::compare(int num)
 		else
 			return 0;
 	}
-void account::Deposit(int mon)
+void account::Deposit(int mon) 
 	{
 		money += mon;
 	}
@@ -44,18 +44,18 @@ account::~account()
 
 NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account(num, mon, nam), interestRate(rate*0.01)
 	{}
-	void NormalAccount::Deposit(int mon)
+void NormalAccount::Deposit(int mon)
 	{
 		account::Deposit(mon);
 		account::Deposit((int)(mon*interestRate));
 	}
-	void NormalAccount::CallAccount() const
+void NormalAccount::CallAccount() const
 	{
 		account::CallAccount();
 		cout << "이자율 : " << interestRate * 100 << endl;
 	}
 
-	HighCreditAccount::HighCreditAccount(int num, int mon, char* nam, double rate, char special) : account(num, mon, nam), specialRate(special), interestRate(rate*0.01)
+HighCreditAccount::HighCreditAccount(int num, int mon, char* nam, double rate, char special) : account(num, mon, nam), specialRate(special), interestRate(rate*0.01)
 	{
 		if (special == 'A')
 			interestRate += 0.7;
@@ -64,12 +64,12 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		else if (special == 'C')
 			interestRate += 0.2;
 	}
-	void HighCreditAccount::Deposit(int mon)
+void HighCreditAccount::Deposit(int mon)
 	{
 		account::Deposit(mon);
 		account::Deposit((int)(mon*interestRate));
 	}
-	void HighCreditAccount::CallAccount() const
+void HighCreditAccount::CallAccount() const
 	{
 		account::CallAccount();
 		cout << "이자율 : " << interestRate * 100 << endl;
@@ -77,9 +77,9 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 	}
 
 
-	ControlBank::ControlBank() :account_num(0)
+ControlBank::ControlBank() :account_num(0)
 	{}
-	int ControlBank::AccountCompare(int num)
+int ControlBank::AccountCompare(int num)
 	{
 		for (int cur = 0; cur < account_num; cur++)
 		{
@@ -88,7 +88,7 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		}
 		return -1;
 	}
-	void ControlBank::CreateAccounts(account* account)
+void ControlBank::CreateAccounts(account* account)
 	{
 		if (account_num < MAX_ACCOUNT)
 		{
@@ -110,7 +110,7 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		//동일 id 제외
 	}
 	//입금
-	void ControlBank::DepositAccounts(int num, int money)
+void ControlBank::DepositAccounts(int num, int money)
 	{
 		int sel_count = AccountCompare(num);
 		if (sel_count == -1)
@@ -123,7 +123,7 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		}
 	}
 	//출금
-	void ControlBank::WithdrawAccounts(int num, int money)
+void ControlBank::WithdrawAccounts(int num, int money)
 	{
 		int sel_count = AccountCompare(num);
 		if (sel_count == -1)
@@ -136,7 +136,7 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		}
 	}
 	//확인
-	void ControlBank::ShowAllAccounts()
+void ControlBank::ShowAllAccounts()
 	{
 		for (int cur = 0; cur < account_num; cur++)
 		{
@@ -144,7 +144,7 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		}
 	}
 	//삭제
-	void ControlBank::DeleteAccounts()
+void ControlBank::DeleteAccounts()
 	{
 		for (int cur = 0; cur < account_num; cur++)
 		{
@@ -152,7 +152,45 @@ NormalAccount::NormalAccount(int num, int mon, char* nam, double rate) : account
 		}
 	}
 
-	void call_menu()
+
+BoundCheckPointArray::BoundCheckPointArray(int len) : acclen(len)
+{	
+	acc = new account[len];
+}
+account& BoundCheckPointArray::operator[](int idx)
+{		
+	if (idx < 0 || idx > MAX_ACCOUNT)
+	{
+
+	}
+
+	return acc[idx];
+}
+BoundCheckPointArray::~BoundCheckPointArray()
+	{
+		delete[] acc;
+	}
+
+
+DepositException::DepositException(int money) : myMoney(money)
+	{}
+void DepositException::ShowResult()
+	{
+		cout << "입금 오류 : " << myMoney << "를 입금할 수 없습니다." << endl;
+	}
+
+
+
+WithdrawException::WithdrawException(int money) : myMoney(money)
+	{}
+void WithdrawException::ShowResult()
+	{
+		cout << "출금 오류 : " << myMoney << "를 출금할 수 없습니다." << endl;
+	}
+
+
+
+void call_menu()
 	{
 		cout << "---------Menu---------" << endl;
 		cout << "1. 계좌 개설 " << endl;

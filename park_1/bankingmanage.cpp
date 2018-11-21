@@ -11,30 +11,46 @@ public:
 	{
 		acc = new account[len];
 	}
+	BoundCheckPointArray& operator[](int len)
+	{
+
+	}
 	~BoundCheckPointArray()
 	{
 		delete[] acc;
 	}
 };
 
-class DepositException
+class AccountException
+{
+public:
+	virtual void ShowResult()=0;
+};
+
+class DepositException : public AccountException
 {
 private:
 	int myMoney;
 public:
 	DepositException(int money) : myMoney(money)
 	{}
-	void 
+	void ShowResult()
+	{
+		cout << "입금 오류 : " << myMoney << "를 입금할 수 없습니다." << endl;
+	}
 };
 
-class WithdrawException
+class WithdrawException : public AccountException
 {
 private:
 	int myMoney;
 public:
 	WithdrawException(int money) : myMoney(money)
 	{}
-
+	void ShowResult()
+	{
+		cout << "출금 오류 : " << myMoney << "를 출금할 수 없습니다." << endl;
+	}
 };
 
 
