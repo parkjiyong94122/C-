@@ -64,7 +64,7 @@ public:
 class BoundCheckPointArray
 {
 private:
-	account* acc;
+	account** acc;
 	int acclen;
 public:
 	BoundCheckPointArray(int len);
@@ -83,7 +83,7 @@ class DepositException : public AccountException
 private:
 	int myMoney;
 public:
-	DepositException(int money) : myMoney(money);
+	DepositException(int money);
 	void ShowResult();
 };
 

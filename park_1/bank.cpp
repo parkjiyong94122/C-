@@ -141,15 +141,16 @@ void ControlBank::DepositAccounts(int num, int money)
 			{
 				accounts[sel_count]->Deposit(money);
 			}
-			catch (int expn)
+			catch (AccountException & expn)
 			{
-				
+				expn.ShowResult();
+				ControlBank::DepositAccounts(num, money);
 			}
 			
 		}
 	}
 	//출금
-void ControlBank::WithdrawAccounts(int num, int money)
+void ControlBank::WithdrawAccounts(int num, int money) 
 	{
 		int sel_count = AccountCompare(num);
 		if (sel_count == -1)
@@ -158,7 +159,15 @@ void ControlBank::WithdrawAccounts(int num, int money)
 		}
 		else
 		{
-			accounts[sel_count]->Withdraw(money);
+			try
+			{
+				accounts[sel_count]->Withdraw(money);
+			}
+			catch (AccountException & expn)
+			{
+				expn.ShowResult();
+				ControlBank::WithdrawAccounts(num, money);
+			}
 		}
 	}
 	//확인
