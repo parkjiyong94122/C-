@@ -3,7 +3,14 @@
 
 class BoundCheckPointArray
 {
+private:
+	account* acc;
+	int acclen;
+public:
+	BoundCheckPointArray(int len) : acclen(len)
+	{
 
+	}
 };
 
 class DepositException
