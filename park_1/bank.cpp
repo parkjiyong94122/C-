@@ -25,17 +25,22 @@ int account::compare(int num)
 		else
 			return 0;
 	}
-void account::Deposit(int mon)  throw DepositException()
+void account::Deposit(int mon)  throw (DepositException)
+{
+	if(mon<0)
 	{
-		money += mon;
+		DepositException expn(mon);
+		throw expn;
 	}
+	money += mon;
+}
 void account::Withdraw(int mon)
-	{
-		if (money < mon)
-			cout << "잔액이 부족합니다." << endl;
-		else
-			money -= mon;
-	}
+{
+	if (money < mon)
+		cout << "잔액이 부족합니다." << endl;
+	else
+		money -= mon;
+}
 account::~account()
 	{
 		cout << "삭제됨 " << endl;
