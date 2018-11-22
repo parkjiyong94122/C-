@@ -1,5 +1,4 @@
 #include"bank.h"
-#include"AccountArray.h"
 
 int main(void)
 {
