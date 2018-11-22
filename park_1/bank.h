@@ -21,6 +21,7 @@ public:
 	int compare(int num);
 	virtual void Deposit(int mon);
 	void Withdraw(int mon);
+	int ReturnId();
 	~account();
 };
 class NormalAccount : public account

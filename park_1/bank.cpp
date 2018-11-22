@@ -43,6 +43,10 @@ void account::Withdraw(int mon) throw (WithdrawException)
 	}
 		money -= mon;
 }
+int account::ReturnId()
+{
+	return number;
+}
 account::~account()
 	{
 		cout << "»èÁ¦µÊ " << endl;
@@ -111,7 +115,7 @@ int ControlBank::AccountCompare(int num)
 	{
 		for (int cur = 0; cur < account_num; cur++)
 		{
-			if (accounts[cur]->compare(num) == 1)
+			if (accounts[cur]->compare(accounts[num]->ReturnId) == 1)
 				return cur;
 		}
 		return -1;
