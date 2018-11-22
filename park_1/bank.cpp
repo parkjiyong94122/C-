@@ -115,14 +115,14 @@ int ControlBank::AccountCompare(int num)
 	{
 		for (int cur = 0; cur < account_num; cur++)
 		{
-			if (accounts[cur]->compare(accounts[num]->ReturnId) == 1)
+			if (accounts[cur]->compare(num) == 1)
 				return cur;
 		}
 		return -1;
 	}
 void ControlBank::CreateAccounts(account* account)
 {
-	int sel_count = AccountCompare(account_num);
+	int sel_count = AccountCompare(account->ReturnId());
 	if (sel_count != -1)
 	{
 		cout << "동일 ID 계좌 생성이 불가능합니다." << endl;
