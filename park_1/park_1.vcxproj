@@ -118,19 +118,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="account.cpp" />
-    <ClCompile Include="AccountArray.cpp" />
-    <ClCompile Include="bank.cpp" />
-    <ClCompile Include="bankingmanage.cpp" />
-    <ClCompile Include="exception.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="account.h" />
-    <ClInclude Include="AccountArray.h" />
-    <ClInclude Include="bank.h" />
-    <ClInclude Include="exception.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

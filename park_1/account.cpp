@@ -1,4 +1,5 @@
 #include "account.h"
+#include <cstring>
 
 account::account(int num = 0, int mon = 0, char* nam = NULL)
 {
